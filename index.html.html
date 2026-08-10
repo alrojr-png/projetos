@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Atividades — 6º ano</title>
+<style>
+  :root{--papel:#FBF7F0;--card:#fff;--creme:#f4eee2;--tinta:#2b2b2b;--suave:#6a6a6a;--linha:#e7dfd0;
+    --port:#b8543f;--port-bg:#f7e9e4;--mat:#2e7d78;--mat-bg:#e4f0ee;
+    --ok:#3f9d5a;--ok-bg:#e7f4ec;--no:#cf4747;--no-bg:#fbeaea;--sombra:0 6px 20px rgba(60,40,20,.10);--dit:#845b78;--dit-bg:#f0e7ee;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;height:100%;}
+  body{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--papel);color:var(--tinta);
+    display:flex;justify-content:center;min-height:100%;}
+  #app{width:100%;max-width:780px;padding:18px 16px 44px;}
+  header{display:flex;align-items:center;gap:10px;margin-bottom:14px;min-height:44px;}
+  header .voltar{border:none;background:var(--card);box-shadow:var(--sombra);border-radius:12px;font-size:22px;
+    width:46px;height:46px;cursor:pointer;flex:none;display:none;}
+  header h1{font-size:19px;margin:0;flex:1;letter-spacing:-.3px;}
+  header .som{border:none;background:var(--card);box-shadow:var(--sombra);border-radius:12px;font-size:20px;
+    width:46px;height:46px;cursor:pointer;flex:none;}
+  .home-cards{display:grid;gap:16px;margin-top:8px;}
+  .big{border:none;border-radius:22px;padding:28px 24px;cursor:pointer;text-align:left;color:#fff;
+    box-shadow:var(--sombra);display:flex;align-items:center;gap:20px;font-family:inherit;}
+  .big .ic{font-size:48px;line-height:1;} .big .tt{display:block;font-size:25px;font-weight:800;letter-spacing:-.3px;}
+  .big .ds{display:block;font-size:15px;opacity:.92;margin-top:3px;font-weight:500;}
+  .big.port{background:linear-gradient(135deg,#c15c45,#a94b37);} .big.mat{background:linear-gradient(135deg,#358a84,#296e69);}
+  .rodape-home{margin-top:20px;color:var(--suave);font-size:13px;text-align:center;line-height:1.5;}
+  .niveis{display:flex;gap:6px;margin-bottom:14px;background:var(--card);border-radius:14px;padding:5px;box-shadow:var(--sombra);}
+  .niv{flex:1;border:none;background:transparent;border-radius:10px;padding:11px;font-family:inherit;font-size:15px;
+    font-weight:800;color:var(--suave);cursor:pointer;}
+  .niv.sel{color:#fff;background:var(--mat);} .port-tema .niv.sel{background:var(--port);}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .tile{border:none;background:var(--card);border-radius:18px;padding:15px;cursor:pointer;box-shadow:var(--sombra);
+    text-align:left;display:flex;align-items:center;gap:12px;font-family:inherit;color:var(--tinta);}
+  .tile .n{width:36px;height:36px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:16px;color:#fff;}
+  .tile .lb{font-size:14.5px;font-weight:700;line-height:1.2;} .tile .em{margin-left:auto;font-size:22px;}
+  .tile.port .n{background:var(--port);} .tile.mat .n{background:var(--mat);}
+  .card-jogo{background:var(--card);border-radius:22px;box-shadow:var(--sombra);padding:22px 20px 26px;}
+  .passo{color:var(--suave);font-size:14px;font-weight:700;text-align:center;margin-bottom:6px;letter-spacing:.5px;}
+  .barra{height:8px;background:var(--linha);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+  .barra>i{display:block;height:100%;background:var(--mat);transition:width .3s;} .port-tema .barra>i{background:var(--port);}
+  .enunciado{display:flex;align-items:flex-start;justify-content:center;gap:10px;font-size:19px;font-weight:700;
+    text-align:center;margin-bottom:8px;line-height:1.35;}
+  .btn-ouvir{border:none;background:var(--mat-bg);color:var(--mat);border-radius:50%;width:38px;height:38px;
+    font-size:17px;cursor:pointer;flex:none;margin-top:2px;} .port-tema .btn-ouvir{background:var(--port-bg);color:var(--port);}
+  .prompt{text-align:center;margin:10px 0 20px;line-height:1.15;}
+  .prompt .conta{font-size:46px;font-weight:800;letter-spacing:1px;} .prompt .numero{font-size:60px;font-weight:800;}
+  .prompt .med{font-size:40px;font-weight:800;letter-spacing:2px;} .prompt .palavra{font-size:40px;font-weight:800;letter-spacing:3px;}
+  .prompt .texto{display:block;background:var(--creme);border-radius:14px;padding:14px 16px;font-size:18px;
+    line-height:1.55;text-align:left;font-weight:500;}
+  .opcoes{display:grid;gap:12px;} .opcoes.num{grid-template-columns:repeat(2,1fr);} .opcoes.let{grid-template-columns:repeat(4,1fr);}
+  .opcoes.word{grid-template-columns:repeat(2,1fr);} .opcoes.frase{grid-template-columns:1fr;}
+  .op{border:2.5px solid var(--linha);background:#fff;border-radius:16px;cursor:pointer;min-height:72px;display:flex;
+    align-items:center;justify-content:center;font-family:inherit;color:var(--tinta);
+    transition:transform .05s,border-color .15s,background .15s;padding:10px 48px 10px 14px;text-align:center;position:relative;}
+  .opcoes.frase .op{justify-content:flex-start;text-align:left;min-height:60px;}
+  .op:active{transform:scale(.98);}
+  .ouvir-op{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;
+    background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;}
+  .ouvir-op:active{background:rgba(0,0,0,.14);}
+  .op .on{font-size:30px;font-weight:800;} .op .ol{font-size:34px;font-weight:800;}
+  .op .ow{font-size:23px;font-weight:700;} .op .of{font-size:18px;font-weight:500;line-height:1.4;}
+  .op.ok{border-color:var(--ok);background:var(--ok-bg);} .op.no{border-color:var(--no);background:var(--no-bg);}
+  .aviso{text-align:center;font-size:19px;font-weight:800;min-height:26px;margin-top:16px;}
+  .aviso.ok{color:var(--ok);} .aviso.no{color:var(--no);}
+  .aviso.dica{color:#a9711b;font-size:16px;font-weight:600;line-height:1.4;}
+  .fim{text-align:center;padding:22px 10px;} .fim .festa{font-size:56px;} .fim .res{font-size:23px;font-weight:800;margin:8px 0 4px;}
+  .fim .sub{color:var(--suave);font-size:15px;margin-bottom:22px;}
+  .fim-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .fim-btns button{border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:var(--sombra);}
+  .fim-btns .denovo{background:var(--mat);color:#fff;} .port-tema .fim-btns .denovo{background:var(--port);} .fim-btns .menu{background:#fff;color:var(--tinta);}
+  .big.dit{background:linear-gradient(135deg,#8f6483,#75506a);}
+  .dit-tema .niv.sel{background:var(--dit);} .dit-tema .barra>i{background:var(--dit);} .dit-tema .fim-btns .denovo{background:var(--dit);}
+  .dit-instr{text-align:center;font-size:20px;font-weight:700;margin:6px 0 18px;}
+  .dit-ouvir{display:block;width:100%;border:none;background:var(--dit);color:#fff;border-radius:16px;padding:22px;font-size:22px;font-weight:800;cursor:pointer;font-family:inherit;}
+  .dit-ouvir:active{transform:scale(.99);}
+  .dit-reveal{min-height:64px;display:flex;align-items:center;justify-content:center;margin:18px 0 8px;}
+  .dit-box{background:var(--creme);border-radius:14px;padding:18px 20px;width:100%;text-align:center;}
+  .dit-palavra{font-size:32px;font-weight:800;color:var(--dit);line-height:1.3;}
+  .dit-acoes{display:flex;justify-content:center;}
+  .dit-btn{border:none;border-radius:16px;padding:15px 26px;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:var(--sombra);}
+  .dit-btn.ver{background:#fff;color:var(--dit);border:2px solid var(--dit);} .dit-btn.prox{background:var(--dit);color:#fff;}
+  .dit-abertura{text-align:center;padding:10px 6px;} .dit-abertura .dit-ic{font-size:52px;}
+  .dit-abertura p{color:var(--suave);font-size:16px;line-height:1.5;margin:10px auto 20px;max-width:460px;}
+  .dit-comecar{border:none;background:var(--dit);color:#fff;border-radius:16px;padding:16px 30px;font-size:18px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:var(--sombra);}
+</style>
+</head>
+<body>
+<div id="app">
+  <header><button class="voltar" id="btnVoltar" aria-label="Voltar">‹</button>
+    <h1 id="titulo">Atividades</h1><button class="som" id="btnSom" aria-label="Som">🔊</button></header>
+  <div id="tela"></div>
+</div>
+<script>
+/* ===== util ===== */
+const rand=n=>Math.floor(Math.random()*n),pick=a=>a[rand(a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rand(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;};
+const el=h=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild;};
+const fmt=n=>Number(n).toLocaleString('pt-BR');
+const wNum=n=>`<span class="on">${fmt(n)}</span>`,wLet=l=>`<span class="ol">${l}</span>`;
+const wWord=t=>`<span class="ow">${t}</span>`,wFrase=t=>`<span class="of">${t}</span>`;
+const txtOp=h=>h.replace(/<[^>]+>/g,'').replace(/\./g,'').trim();
+function distr(c,deltas){const s=new Set([c]),out=[],pool=(deltas||[1,-1,2,-2,10,-10,100,-100]).slice();
+  while(out.length<3&&pool.length){const v=c+pool.shift();if(v>=0&&!s.has(v)){s.add(v);out.push(v);}}
+  let k=1;while(out.length<3){const v=c+k;if(v>=0&&!s.has(v)){s.add(v);out.push(v);}k++;}return out;}
+const optsNum=(c,d)=>shuffle([c,...distr(c,d)]).map(n=>({h:wNum(n),ok:n===c}));
+const optsFrom=(corr,dist,wrap)=>shuffle([{v:corr,ok:1},...dist.map(v=>({v,ok:0}))]).map(o=>({h:wrap(o.v),ok:!!o.ok}));
+const L=(lvl,a,b)=>lvl===2?b:a; // escolhe por nível
+
+/* ===== som ===== */
+let somLigado=true,ptVoice=null;
+function carregaVoz(){const vs=speechSynthesis.getVoices();ptVoice=vs.find(v=>/pt-BR/i.test(v.lang))||vs.find(v=>/pt/i.test(v.lang))||null;}
+if('speechSynthesis'in window){carregaVoz();speechSynthesis.onvoiceschanged=carregaVoz;}
+function falar(t,rate){if(!somLigado||!('speechSynthesis'in window)||!t)return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';u.rate=rate||.98;if(ptVoice)u.voice=ptVoice;speechSynthesis.speak(u);}catch(e){}}
+const falarDit=t=>falar(t,.85);
+let ac=null;
+function tom(ok){if(!somLigado)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();
+  const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);o.type='sine';const t=ac.currentTime;
+  if(ok){o.frequency.setValueAtTime(660,t);o.frequency.setValueAtTime(880,t+.12);}else o.frequency.setValueAtTime(300,t);
+  g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.22,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+(ok?.28:.22));
+  o.start(t);o.stop(t+(ok?.3:.25));}catch(e){}}
+
+/* ===== MATEMÁTICA ===== */
+const ITENS=['cadernos','canetas','lanches','ingressos','revistas','sanduíches'];
+const MED={1:[['Quantas unidades há em uma dúzia?',12],['Quantas unidades há em meia dúzia?',6],
+  ['Quantos dias há em uma semana?',7],['Quantos minutos há em meia hora?',30],['Quantos minutos há em uma hora?',60],
+  ['Quantos meses há em um ano?',12]],
+ 2:[['Quantos minutos há em 2 horas?',120],['Quantos centímetros há em 1 metro?',100],['Quantos gramas há em meio quilo?',500],
+  ['Quantos minutos há em uma hora e meia?',90],['Quantos metros há em 1 quilômetro?',1000],
+  ['Quantos mililitros há em 2 litros?',2000],['Quantos gramas há em 1 quilo?',1000]]};
+const MAT=[
+ {t:'Adição',ic:'➕',gen:(lvl=1)=>{const a=L(lvl,10+rand(89),120+rand(680)),b=L(lvl,10+rand(89),120+rand(480)),c=a+b;
+   return{say:`Quanto é ${a} mais ${b}?`,prompt:`<span class="conta">${fmt(a)} + ${fmt(b)}</span>`,kind:'num',opts:optsNum(c,[10,-10,1,-1,100,-100])};}},
+ {t:'Subtração',ic:'➖',gen:(lvl=1)=>{const a=L(lvl,25+rand(70),300+rand(600));const b=L(lvl,5+rand(a-8),80+rand(a-120)),c=a-b;
+   return{say:`Quanto é ${a} menos ${b}?`,prompt:`<span class="conta">${fmt(a)} − ${fmt(b)}</span>`,kind:'num',opts:optsNum(c,[10,-10,1,-1,100,-100])};}},
+ {t:'Multiplicação',ic:'✖️',gen:(lvl=1)=>{let a,b;if(lvl===2){a=11+rand(18);b=3+rand(6);}else{a=2+rand(8);b=2+rand(8);}const c=a*b;
+   return{say:`Quanto é ${a} vezes ${b}?`,prompt:`<span class="conta">${a} × ${b}</span>`,kind:'num',opts:optsNum(c,[a,-a,b,-b,1,-1,10,-10])};}},
+ {t:'Divisão',ic:'➗',gen:(lvl=1)=>{const b=L(lvl,2+rand(4),2+rand(8)),q=L(lvl,2+rand(4),2+rand(10)),a=b*q;
+   return{say:`Quanto é ${a} dividido por ${b}?`,prompt:`<span class="conta">${a} ÷ ${b}</span>`,kind:'num',opts:optsNum(q,[1,-1,2,-2,3,-3])};}},
+ {t:'Problema com R$',ic:'💰',gen:(lvl=1)=>{const item=pick(ITENS);
+   if(lvl===1){const p=2+rand(8),n=2+rand(2),tot=p*n;
+     return{say:`${n} ${item} custam R$ ${p} cada. Quanto no total?`,prompt:`<span class="texto">${n} ${item} custam <b>R$ ${p}</b> cada.<br>Quanto você paga no total?</span>`,kind:'num',opts:optsNum(tot,[p,-p,1,-1,10,-10])};}
+   const p=3+rand(13),n=2+rand(3),tot=p*n,nota=[20,50,100].find(x=>x>tot)||100,troco=nota-tot;
+   return{say:`Comprei ${n} ${item} de R$ ${p} cada e paguei com R$ ${nota}. Quanto de troco?`,prompt:`<span class="texto">Comprei ${n} ${item} de <b>R$ ${p}</b> cada.<br>Paguei com <b>R$ ${nota}</b>. Quanto recebo de troco?</span>`,kind:'num',opts:optsNum(troco,[1,-1,5,-5,10,-10])};}},
+ {t:'Fração de um número',ic:'🍕',gen:(lvl=1)=>{if(lvl===1){const d=pick([2,3,4]),k=2+rand(3),N=d*k,c=k;
+     return{say:`Quanto é 1 sobre ${d} de ${N}?`,prompt:`<span class="conta">1/${d} de ${N}</span>`,kind:'num',opts:optsNum(c,[1,-1,2,-2,d,-d])};}
+   const d=pick([3,4,5,6]),k=2+rand(5),N=d*k,a=1+rand(d-1),c=a*k;
+   return{say:`Quanto é ${a} sobre ${d} de ${N}?`,prompt:`<span class="conta">${a}/${d} de ${N}</span>`,kind:'num',opts:optsNum(c,[k,-k,1,-1,2,-2])};}},
+ {t:'Valor do algarismo',ic:'🔢',gen:(lvl=1)=>{
+   if(lvl===1){const d=[1+rand(9),rand(10),1+rand(9)];const N=d[0]*100+d[1]*10+d[2];const pos=pick([0,2]);
+     const dig=d[pos],place=[100,10,1][pos],c=dig*place;
+     return{say:`Qual é o valor do algarismo ${dig} no número ${N}?`,prompt:`<span class="numero">${fmt(N)}</span>`,kind:'num',
+       opts:optsFrom(c,[dig,dig*(place===100?10:100)].concat(place===1?[dig*10]:[1]).filter((v,i,a)=>v!==c&&a.indexOf(v)===i).slice(0,3),wNum)};}
+   const d=[1+rand(9),rand(10),1+rand(9),rand(10)];const N=d[0]*1000+d[1]*100+d[2]*10+d[3];const pos=pick([0,2]);
+   const dig=d[pos],place=[1000,100,10,1][pos],c=dig*place;
+   return{say:`Qual é o valor do algarismo ${dig} no número ${N}?`,prompt:`<span class="numero">${fmt(N)}</span>`,kind:'num',
+     opts:optsFrom(c,[dig,dig*(place===1000?100:1000),dig*(place===100?10:100)].filter((v,i,a)=>v!==c&&a.indexOf(v)===i).slice(0,3),wNum)};}},
+ {t:'Sequência',ic:'🔗',gen:(lvl=1)=>{let seq,c;
+   if(lvl===1){const s=2+rand(4),i=2+rand(15);seq=[i,i+s,i+2*s,i+3*s];c=i+4*s;}
+   else{const tipo=rand(3);if(tipo===0){const s=3+rand(8),i=5+rand(20);seq=[i,i+s,i+2*s,i+3*s];c=i+4*s;}
+     else if(tipo===1){const s=2+rand(9),i=60+rand(40);seq=[i,i-s,i-2*s,i-3*s];c=i-4*s;}
+     else{const i=1+rand(4);seq=[i,i*2,i*4,i*8];c=i*16;}}
+   return{say:'Qual é o próximo número da sequência?',prompt:`<span class="med">${seq.map(fmt).join('  ,  ')}  ,  ?</span>`,kind:'num',opts:optsNum(c,[1,-1,2,-2,seq[1]-seq[0],-(seq[1]-seq[0])])};}},
+ {t:'Qual é maior',ic:'⚖️',gen:(lvl=1)=>{
+   if(lvl===1){const set=new Set();const vals=[];while(vals.length<3){const v=5+rand(95);if(!set.has(v)){set.add(v);vals.push(v);}}
+     const mx=Math.max(...vals);return{say:'Toque no número maior',prompt:'',kind:'num',opts:shuffle(vals).map(v=>({h:wNum(v),ok:v===mx}))};}
+   if(rand(2)){const b=2+rand(6);const set=new Set();const vals=[];while(vals.length<3){const ce=10+rand(89);if(!set.has(ce)){set.add(ce);vals.push(b+ce/100);}}
+     const mx=Math.max(...vals);return{say:'Toque no número maior',prompt:'',kind:'word',opts:shuffle(vals).map(v=>({h:wWord(v.toFixed(2).replace('.',',')),ok:v===mx}))};}
+   const set=new Set();const vals=[];while(vals.length<4){const v=100+rand(9800);if(!set.has(v)){set.add(v);vals.push(v);}}
+   const mx=Math.max(...vals);return{say:'Toque no número maior',prompt:'',kind:'num',opts:shuffle(vals).map(v=>({h:wNum(v),ok:v===mx}))};}},
+ {t:'Medidas',ic:'📏',gen:(lvl=1)=>{const[q,c]=pick(MED[lvl]);
+   return{say:q,prompt:`<span class="texto">${q}</span>`,kind:'num',opts:optsNum(c,[10,-10,100,-100,c,-Math.floor(c/2)])};}}
+];
+
+/* ===== PORTUGUÊS ===== */
+const P_INTERP={1:[
+  {t:'Marina acordou cedo e foi à feira. Comprou frutas e verduras, mas esqueceu de comprar pão.',q:'O que Marina esqueceu de comprar?',a:'pão',d:['frutas','verduras']},
+  {t:'O Sol é uma estrela. Ele dá luz e calor para a Terra e para os outros planetas.',q:'O que o Sol dá para a Terra?',a:'luz e calor',d:['chuva e vento','água e ar']},
+  {t:'Lucas plantou um pé de tomate no quintal. Todo dia, pela manhã, ele rega a planta.',q:'Quando Lucas rega a planta?',a:'pela manhã',d:['à noite','à tarde']},
+  {t:'A biblioteca abre às 8h e fecha às 17h. Aos domingos, ela fica fechada o dia todo.',q:'Quando a biblioteca fica fechada?',a:'aos domingos',d:['às 8h','de segunda a sexta']}],
+ 2:[
+  {t:'Pedro treina futebol às terças e quintas. No fim de semana, ele descansa e joga videogame.',q:'Quando Pedro treina futebol?',a:'terças e quintas',d:['todos os dias','no fim de semana']},
+  {t:'A onça-pintada vive na mata. Ela caça à noite e passa boa parte do dia dormindo.',q:'Quando a onça caça?',a:'à noite',d:['de manhã','de tarde']},
+  {t:'João saiu de casa sem guarda-chuva. No caminho, começou a chover forte e ele se molhou todo.',q:'Por que João se molhou?',a:'não levou guarda-chuva',d:['estava muito calor','foi de carro']},
+  {t:'A prova estava difícil, mas Clara tinha estudado bastante durante a semana. Ela terminou sorrindo.',q:'Como Clara terminou a prova?',a:'contente',d:['com medo','com raiva']}]};
+const SIN={1:[['feliz','alegre',['triste','cansado']],['grande','enorme',['pequeno','curto']],['bonito','belo',['feio','velho']],['rápido','veloz',['lento','parado']],['esperto','inteligente',['preguiçoso','distraído']]],
+ 2:[['começar','iniciar',['terminar','parar']],['difícil','complicado',['fácil','simples']],['assustado','amedrontado',['corajoso','calmo']],['cansado','exausto',['disposto','animado']],['corajoso','valente',['medroso','tímido']],['antigo','velho',['novo','moderno']]]};
+const ANT={1:[['claro','escuro',['limpo','molhado']],['alegre','triste',['bravo','calmo']],['cheio','vazio',['aberto','novo']],['quente','frio',['morno','seco']],['dia','noite',['tarde','manhã']]],
+ 2:[['subir','descer',['correr','pular']],['forte','fraco',['alto','magro']],['generoso','egoísta',['gentil','rico']],['corajoso','covarde',['esperto','forte']],['aumentar','diminuir',['somar','crescer']],['antigo','moderno',['usado','caro']]]};
+const ORT={1:[['te_po','M',['N'],'tempo'],['ca_po','M',['N'],'campo'],['bo_ba','M',['N'],'bomba'],['ta_bor','M',['N'],'tambor'],['o_bro','M',['N'],'ombro'],['po_ba','M',['N'],'pomba']],
+ 2:[['ho_e','J',['G'],'hoje'],['_ente','G',['J'],'gente'],['via_em','G',['J'],'viagem'],['gara_em','G',['J'],'garagem'],['ca_a','S',['Z'],'casa'],['bele_a','Z',['S'],'beleza'],['ro_a','S',['Z'],'rosa'],['_iló','J',['G'],'jiló']]};
+const ESCR={1:[['viagem',['viajem','viage']],['gente',['jente','geente']],['casa',['caza','cassa']],['hoje',['oje','hoji']],['cabeça',['cabesa','cabessa']]],
+ 2:[['exceção',['exeção','esceção']],['açúcar',['assucar','açucar']],['através',['atravez','atraiz']],['mexer',['mecher','mexeir']],['exercício',['exercisio','ezercício']],['bagagem',['bagajem','bagage']]]};
+const PLU={1:[['casa','casas',['casaes','casan']],['livro','livros',['livroes','livris']],['flor','flores',['flors','floros']],['carro','carros',['carroes','carris']],['mesa','mesas',['mesaes','mesos']],['bola','bolas',['bolaes','boles']]],
+ 2:[['cão','cães',['cãos','cãoes']],['pão','pães',['pãos','pões']],['animal','animais',['animales','animals']],['papel','papéis',['papeis','papels']],['limão','limões',['limãos','limons']],['mão','mãos',['mães','manos']],['jornal','jornais',['jornales','jornals']]]};
+const ACE={1:[['café',['cafe','cáfe']],['sofá',['sofa','sófa']],['você',['voce','vocé']],['água',['agua','águá']],['avó',['avo','ávo']]],
+ 2:[['fácil',['facil','facíl']],['ônibus',['onibus','onibús']],['régua',['regua','réguá']],['médico',['medico','médíco']],['lâmpada',['lampada','lampâda']],['árvore',['arvore','árvorê']]]};
+const CLASSE={1:[['O menino correu para casa','correu','o verbo'],['As crianças brincaram no parque','brincaram','o verbo'],['O cachorro late muito','late','o verbo'],['O pássaro voou alto','pássaro','o substantivo'],['A menina sorriu feliz','menina','o substantivo'],['O relógio quebrou ontem','relógio','o substantivo']],
+ 2:[['O céu está azul','azul','o adjetivo'],['A prova foi difícil','difícil','o adjetivo'],['O sol é quente','quente','o adjetivo'],['Aquele carro é veloz','veloz','o adjetivo'],['A viagem foi cansativa','cansativa','o adjetivo'],['O gato preto dormiu','preto','o adjetivo']]};
+const COMPL={1:[['Ontem eu ___ ao cinema.','fui',['vou','ir']],['As meninas ___ felizes.','estão',['está','estou']],['Nós ___ na escola agora.','estamos',['está','estou']],['Você ___ meu amigo.','é',['são','sou']],['Ele ___ um livro todo dia.','lê',['leem','ler']]],
+ 2:[['Nós ___ ao cinema ontem.','fomos',['foi','fui']],['Ontem ___ muitos alunos na aula.','faltaram',['faltou','faltar']],['Eles já ___ o dever.','fizeram',['fez','fazer']],['As portas foram ___.','abertas',['aberto','abrir']],['Amanhã nós ___ viajar.','vamos',['vai','vou']],['Ontem nós ___ muito.','corremos',['correu','correr']]]};
+const PONT={1:[['Meu nome é Ana.',['meu nome é ana.','Meu nome é ana']],['Que dia lindo!',['que dia lindo!','Que dia lindo']],['O gato dormiu.',['o gato dormiu.','O gato dormiu']],['Eu gosto de ler.',['eu gosto de ler.','Eu gosto de ler']]],
+ 2:[['Você viu o João?',['voce viu o joão?','Você viu o joão']],['Onde você mora?',['onde você mora?','Onde voce mora']],['O Pedro gosta de futebol.',['o pedro gosta de futebol.','O pedro gosta de Futebol']],['Ana, venha aqui!',['ana venha aqui!','Ana venha aqui']]]};
+
+const PORT=[
+ {t:'Interpretação',ic:'📖',gen:(lvl=1)=>{const x=pick(P_INTERP[lvl]);
+   return{say:`${x.t} ${x.q}`,prompt:`<span class="texto">${x.t}<br><br><b>${x.q}</b></span>`,kind:'frase',opts:optsFrom(x.a,x.d,wFrase)};}},
+ {t:'Sinônimo',ic:'🟰',gen:(lvl=1)=>{const[p,s,d]=pick(SIN[lvl]);
+   return{say:`Qual palavra quer dizer o mesmo que ${p}?`,prompt:`<span class="palavra">${p.toUpperCase()}</span>`,kind:'word',opts:optsFrom(s,d,wWord)};}},
+ {t:'Antônimo',ic:'↔️',gen:(lvl=1)=>{const[p,a,d]=pick(ANT[lvl]);
+   return{say:`Qual é o contrário de ${p}?`,prompt:`<span class="palavra">${p.toUpperCase()}</span>`,kind:'word',opts:optsFrom(a,d,wWord)};}},
+ {t:'Ortografia',ic:'✏️',gen:(lvl=1)=>{const[frag,ans,d,word]=pick(ORT[lvl]);
+   return{say:`Que letra completa a palavra ${word}?`,prompt:`<span class="palavra">${frag.replace('_','__').toUpperCase()}</span>`,kind:'let',opts:optsFrom(ans,d,wLet)};}},
+ {t:'Escrita certa',ic:'🔤',gen:(lvl=1)=>{const[c,d]=pick(ESCR[lvl]);
+   return{say:'Toque na palavra escrita corretamente',prompt:'',kind:'word',opts:optsFrom(c,d,wWord)};}},
+ {t:'Plural',ic:'➕',gen:(lvl=1)=>{const[s,pl,d]=pick(PLU[lvl]);
+   return{say:`Qual é o plural de ${s}?`,prompt:`<span class="palavra">${s.toUpperCase()}</span>`,kind:'word',opts:optsFrom(pl,d,wWord)};}},
+ {t:'Acentuação',ic:'´',gen:(lvl=1)=>{const[c,d]=pick(ACE[lvl]);
+   return{say:'Toque na palavra acentuada corretamente',prompt:'',kind:'word',opts:optsFrom(c,d,wWord)};}},
+ {t:'Classe da palavra',ic:'🏷️',gen:(lvl=1)=>{const[frase,alvo,classe]=pick(CLASSE[lvl]);const palavras=frase.split(' ');
+   const dica=classe.includes('verbo')?'O verbo mostra uma ação — o que alguém faz.':classe.includes('substantivo')?'O substantivo é o nome de uma pessoa, animal ou coisa.':'O adjetivo diz uma qualidade — como a coisa é.';
+   return{say:`${frase}. Na frase, toque ${classe}`,prompt:`<span class="texto">${frase}.</span>`,kind:'word',dica,opts:shuffle(palavras).map(w=>({h:wWord(w),ok:w===alvo}))};}},
+ {t:'Complete a frase',ic:'🧩',gen:(lvl=1)=>{const[frase,ans,d]=pick(COMPL[lvl]);
+   return{say:frase.replace('___','...'),prompt:`<span class="texto">${frase}</span>`,kind:'word',opts:optsFrom(ans,d,wWord)};}},
+ {t:'Frase correta',ic:'✅',gen:(lvl=1)=>{const[c,d]=pick(PONT[lvl]);
+   return{say:'Toque na frase escrita corretamente',prompt:'',kind:'frase',opts:optsFrom(c,d,wFrase)};}}
+];
+
+const DITADO={
+ 1:['casa','gato','bola','escola','amigo','tempo','campo','bomba','hoje','gente','viagem','beleza','rosa','cachorro','janela','caderno','professor','cidade','chuva','palavra','trabalho','família','mochila','abelha','coração','girafa','borracha','bicicleta'],
+ 2:['O gato subiu no telhado.','Minha escola é muito grande.','Nós viajamos nas férias.','A abelha voou pela janela.','Ele guardou o caderno na mochila.','Hoje o dia está bonito.','A professora explicou a lição.','O cachorro correu no quintal.','Comprei pão na padaria.','As crianças brincaram no parque.','A chuva molhou a rua.','Gosto de ler histórias.']};
+
+/* ===== dicas ===== */
+const DICAS_MAT=['Some começando pela direita: primeiro as unidades, depois as dezenas.','Comece pela direita. Se precisar, peça emprestado da casa ao lado.','Multiplicar é somar o mesmo número várias vezes. Vá com calma.','Pense na tabuada ao contrário: esse número cabe quantas vezes?','Releia com calma: descubra primeiro quanto foi gasto, depois faça a conta que a pergunta pede.','Primeiro divida o número pela parte de baixo da fração; depois multiplique pela de cima.','Veja a casa do algarismo: unidade vale 1, dezena vale 10, centena vale 100 e milhar vale 1000.','Descubra o que muda de um número para o outro e repita esse mesmo passo.','Compare começando pela casa de maior valor. Nos decimais, olhe as casas depois da vírgula.','Lembre: 1 hora tem 60 minutos, 1 metro tem 100 cm, 1 quilo tem 1000 g e 1 litro tem 1000 ml.'];
+const DICAS_PORT=['A resposta está no texto. Leia de novo a parte que fala sobre a pergunta.','Sinônimo é uma palavra com o mesmo sentido. Qual quer dizer a mesma coisa?','Antônimo é o contrário. Qual palavra significa o oposto?','Antes de P e B, escrevemos M. Nos outros casos, preste atenção no som da palavra.','Olhe cada letra com atenção e lembre de como a palavra aparece nos livros.','No plural muda o final. Palavras terminadas em -ão e em -l mudam de um jeito especial.','Veja qual palavra está com o acento no lugar certo.','Pense no que a palavra faz na frase.','Escolha o verbo que combina com quem faz a ação e com o tempo: ontem, hoje ou amanhã.','Toda frase começa com letra maiúscula e termina com ponto, interrogação ou exclamação.'];
+
+/* ===== engine ===== */
+const tela=document.getElementById('tela'),titulo=document.getElementById('titulo'),
+  btnVoltar=document.getElementById('btnVoltar'),btnSom=document.getElementById('btnSom');
+const TOTAL=6;let ctx={};let NIVEL=1;
+btnSom.onclick=()=>{somLigado=!somLigado;btnSom.textContent=somLigado?'🔊':'🔇';if(!somLigado&&'speechSynthesis'in window)speechSynthesis.cancel();};
+btnVoltar.onclick=()=>{if(ctx.view==='ditadoPlay')return abreDitadoInicio();if(ctx.view==='ditadoInicio')return abreHome();if(ctx.atividade!=null)return abreMenu(ctx.area);abreHome();};
+function setTema(t){document.body.classList.toggle('port-tema',t==='port');document.body.classList.toggle('dit-tema',t==='dit');}
+
+function abreHome(){ctx={};setTema(null);titulo.textContent='Atividades';btnVoltar.style.display='none';
+  tela.innerHTML=`<div class="home-cards">
+    <button class="big port" data-a="port"><span class="ic">📖</span><span><span class="tt">Língua Portuguesa</span><span class="ds">Leitura, gramática e ortografia</span></span></button>
+    <button class="big mat" data-a="mat"><span class="ic">🔢</span><span><span class="tt">Matemática</span><span class="ds">Operações, frações e problemas</span></span></button>
+    <button class="big dit" id="cardDit"><span class="ic">✍️</span><span><span class="tt">Ditado</span><span class="ds">Ouça e escreva no caderno</span></span></button></div>
+    <p class="rodape-home">Toque em uma matéria. Dentro dela, escolha o Nível 1 ou o Nível 2. O aparelho lê tudo em voz alta — toque no 🔊.</p>`;
+  tela.querySelectorAll('.big[data-a]').forEach(b=>b.onclick=()=>abreMenu(b.dataset.a));
+  document.getElementById('cardDit').onclick=abreDitadoInicio;}
+
+function abreMenu(area){ctx={area};const tema=area==='port'?'port':'mat';setTema(tema);
+  const lista=area==='port'?PORT:MAT;titulo.textContent=area==='port'?'Língua Portuguesa':'Matemática';
+  btnVoltar.style.display='flex';const cls=area==='port'?'port':'mat';
+  tela.innerHTML=`<div class="niveis">
+      <button class="niv ${NIVEL===1?'sel':''}" data-n="1">Nível 1</button>
+      <button class="niv ${NIVEL===2?'sel':''}" data-n="2">Nível 2</button></div>
+    <div class="grid">`+lista.map((a,i)=>`<button class="tile ${cls}" data-i="${i}"><span class="n">${i+1}</span><span class="lb">${a.t}</span><span class="em">${a.ic}</span></button>`).join('')+`</div>`;
+  tela.querySelectorAll('.niv').forEach(b=>b.onclick=()=>{NIVEL=+b.dataset.n;abreMenu(area);});
+  tela.querySelectorAll('.tile').forEach(b=>b.onclick=()=>iniciaAtividade(area,+b.dataset.i));}
+
+function iniciaAtividade(area,i){const lista=area==='port'?PORT:MAT;
+  ctx={area,atividade:i,def:lista[i],passo:0,acertos:0,deprimeira:0,nivel:NIVEL};titulo.textContent=lista[i].t;proximoItem();}
+
+function proximoItem(){if(ctx.passo>=TOTAL)return telaFim();ctx.attempts=0;
+  const item=ctx.def.gen(ctx.nivel);ctx.item=item;const pct=Math.round(ctx.passo/TOTAL*100);
+  tela.innerHTML=`<div class="card-jogo"><div class="passo">${ctx.passo+1} de ${TOTAL} · ${ctx.nivel===2?'Nível 2':'Nível 1'}</div>
+    <div class="barra"><i style="width:${pct}%"></i></div>
+    <div class="enunciado"><span>${item.say}</span><button class="btn-ouvir" id="ouvir" aria-label="Ouvir">🔊</button></div>
+    <div class="prompt">${item.prompt||''}</div><div class="opcoes ${item.kind}" id="opcoes"></div>
+    <div class="aviso" id="aviso"></div></div>`;
+  const cont=document.getElementById('opcoes'),aviso=document.getElementById('aviso');
+  item.opts.forEach(o=>{const b=el(`<button class="op"><span class="opc">${o.h}</span><span class="ouvir-op" aria-label="Ouvir opção">🔊</span></button>`);
+    b.onclick=()=>responder(b,o,cont,aviso);b.querySelector('.ouvir-op').addEventListener('click',e=>{e.stopPropagation();falar(txtOp(o.h));});
+    cont.appendChild(b);});
+  document.getElementById('ouvir').onclick=()=>falar(item.say);setTimeout(()=>falar(item.say),250);}
+
+function responder(botao,opt,cont,aviso){if(cont.dataset.locked||botao.disabled)return;
+  if(opt.ok){cont.dataset.locked='1';[...cont.children].forEach(b=>b.setAttribute('disabled',''));botao.classList.add('ok');
+    ctx.acertos++;if((ctx.attempts||0)===0)ctx.deprimeira++;const primeira=(ctx.attempts||0)===0;
+    aviso.textContent=primeira?'Certo!':'Isso! Você chegou lá.';aviso.className='aviso ok';tom(true);falar(primeira?'Certo!':'Isso! Você chegou lá.');
+    setTimeout(()=>{ctx.passo++;proximoItem();},1050);return;}
+  botao.classList.add('no');botao.setAttribute('disabled','');ctx.attempts=(ctx.attempts||0)+1;tom(false);
+  const arr=ctx.area==='mat'?DICAS_MAT:DICAS_PORT,dica=ctx.item.dica||arr[ctx.atividade]||'Observe com calma e tente outra vez.';
+  const aindaAtivas=[...cont.children].filter(b=>!b.disabled).length;
+  if(ctx.attempts>=2||aindaAtivas<=1){cont.dataset.locked='1';const btns=[...cont.children];btns.forEach(b=>b.setAttribute('disabled',''));
+    const idx=ctx.item.opts.findIndex(o=>o.ok);if(btns[idx])btns[idx].classList.add('ok');
+    const ansTxt=txtOp(ctx.item.opts[idx].h);aviso.textContent='💡 '+dica+' A resposta certa é: '+ansTxt+'.';aviso.className='aviso dica';
+    falar(dica+' A resposta certa é: '+ansTxt+'.');setTimeout(()=>{ctx.passo++;proximoItem();},2600);}
+  else{aviso.textContent='💡 '+dica+' Tente de novo.';aviso.className='aviso dica';falar(dica);}}
+
+function telaFim(){const a=ctx.acertos,dp=ctx.deprimeira||0;
+  const msg=a===TOTAL?'Gabaritou!':a>=TOTAL/2?'Mandou bem!':'Continue praticando';const extra=(dp<a)?` ${dp} de primeira.`:'';
+  tela.innerHTML=`<div class="card-jogo fim"><div class="festa">${a>=TOTAL/2?'🎯':'💪'}</div>
+    <div class="res">${msg}</div><div class="sub">Você acertou ${a} de ${TOTAL}.${extra}</div>
+    <div class="fim-btns"><button class="denovo" id="denovo">↻ De novo</button><button class="menu" id="pmenu">Voltar</button></div></div>`;
+  falar(msg+'. Você acertou '+a+' de '+TOTAL);
+  document.getElementById('denovo').onclick=()=>iniciaAtividade(ctx.area,ctx.atividade);
+  document.getElementById('pmenu').onclick=()=>abreMenu(ctx.area);}
+
+function abreDitadoInicio(){ctx={view:'ditadoInicio'};setTema('dit');titulo.textContent='Ditado';btnVoltar.style.display='flex';
+  tela.innerHTML=`<div class="niveis">
+      <button class="niv ${NIVEL===1?'sel':''}" data-n="1">Nível 1 · palavras</button>
+      <button class="niv ${NIVEL===2?'sel':''}" data-n="2">Nível 2 · frases</button></div>
+    <div class="card-jogo dit-abertura"><div class="dit-ic">✍️</div>
+      <p>O tablet fala uma palavra${NIVEL===2?' ou frase':''}. O aluno escreve no caderno e, quando quiser, toca em <b>Ver a resposta</b> para conferir.</p>
+      <button class="dit-comecar" id="dComecar">Começar ditado</button></div>`;
+  tela.querySelectorAll('.niv').forEach(b=>b.onclick=()=>{NIVEL=+b.dataset.n;abreDitadoInicio();});
+  document.getElementById('dComecar').onclick=iniciaDitado;}
+
+function iniciaDitado(){const pool=DITADO[NIVEL];const total=Math.min(8,pool.length);
+  ctx={view:'ditadoPlay',nivel:NIVEL,passo:0,total,lista:shuffle(pool).slice(0,total)};titulo.textContent='Ditado';proximaDitado();}
+
+function proximaDitado(){if(ctx.passo>=ctx.total)return fimDitado();
+  const item=ctx.lista[ctx.passo],pct=Math.round(ctx.passo/ctx.total*100);
+  tela.innerHTML=`<div class="card-jogo">
+    <div class="passo">${ctx.passo+1} de ${ctx.total} · ${ctx.nivel===2?'Nível 2':'Nível 1'}</div>
+    <div class="barra"><i style="width:${pct}%"></i></div>
+    <div class="dit-instr">Ouça e escreva no caderno</div>
+    <button class="dit-ouvir" id="dOuvir">🔊 Ouvir de novo</button>
+    <div class="dit-reveal" id="dReveal"></div>
+    <div class="dit-acoes" id="dAcoes"><button class="dit-btn ver" id="dVer">Ver a resposta</button></div></div>`;
+  setTimeout(()=>falarDit(item),300);
+  document.getElementById('dOuvir').onclick=()=>falarDit(item);
+  document.getElementById('dVer').onclick=()=>{
+    document.getElementById('dReveal').innerHTML=`<div class="dit-box"><span class="dit-palavra">${item}</span></div>`;
+    document.getElementById('dAcoes').innerHTML=`<button class="dit-btn prox" id="dProx">Próxima ›</button>`;
+    document.getElementById('dProx').onclick=()=>{ctx.passo++;proximaDitado();};};}
+
+function fimDitado(){tela.innerHTML=`<div class="card-jogo fim"><div class="festa">✍️</div>
+    <div class="res">Ditado concluído!</div><div class="sub">Confira no caderno se escreveu tudo certo.</div>
+    <div class="fim-btns"><button class="denovo" id="dDeNovo">↻ Outro ditado</button><button class="menu" id="dMenu">Voltar</button></div></div>`;
+  falar('Ditado concluído! Confira no caderno.');
+  document.getElementById('dDeNovo').onclick=iniciaDitado;
+  document.getElementById('dMenu').onclick=abreDitadoInicio;}
+
+abreHome();
+</script>
+</body>
+</html>
